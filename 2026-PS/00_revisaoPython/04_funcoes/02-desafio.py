@@ -57,18 +57,3 @@ def relatorio():
     print(f"Media         : {res:.2f}")
     print(f"Você está     : {situa} {emoji}")
 relatorio()
-
-#Funcão adicionar aluno 
-#def otr_aluno():
- #  vali_input()
-  #  res = calcular_media(n1,n1)
-   # situa, emoji = verif_situação(res)
-    #print("\n++++++ Relatório ++++++")
-    #print(f"Nome          : {nome}")
-#    print(f"Media         : {res:.2f}")
- #   print(f"Situação      : {situa} {emoji}")
-    
-#continuar = "s"
-#hile continuar =="s":
- #   otr_aluno()
-  #  continuar = input("\nProcessar outra pessoa? (s/n): ").lower()
