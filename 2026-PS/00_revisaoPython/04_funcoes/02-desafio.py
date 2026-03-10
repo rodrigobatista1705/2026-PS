@@ -16,9 +16,7 @@ def exibir_cabecalho():
 '''Chama função'''
 exibir_cabecalho()
 
-def nome():
-    nomes = input("\nQual seu nome: ")
-nomes = nome()
+nomes = input("\nQual seu nome: ")
 
 def vali_input():
     while True:
