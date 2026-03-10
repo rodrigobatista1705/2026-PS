@@ -36,6 +36,13 @@ print(f"25°C = {celsius_para_fahrenheit(25):.1f}°F")
 #BLOCO 4: CAMADAS
 
 from utils import cabecalho_secao, formatar_resultado
+from conversores import milhas_para_km
+
+print(cabecalho_secao("Conversão de Distância"))
+print(formatar_resultado("Km → mi", 100, "Km", km_para_milhas, "mi"))
+print(formatar_resultado("Km → mi", 100, "Km", milhas_para_km(), "km"))
 
 print(cabecalho_secao("Conversão de Temperatura"))
-print(formatar_resultado("°C → K", 100, "°C", cel)
+print(formatar_resultado("Km → mi", 100, "Km", km_para_milhas, "mi"))
+print(formatar_resultado("Km → mi", 100, "Km", milhas_para_km(), "km"))
+

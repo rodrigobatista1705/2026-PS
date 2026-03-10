@@ -28,6 +28,7 @@ def vali_input():
             print("Entrada inválida! Digite apenas números.")
             
 n1, n2 = vali_input()
+
 # Função de Calcular media    
 def calcular_media(n1, n2):
     med = (n1+n2)/2
