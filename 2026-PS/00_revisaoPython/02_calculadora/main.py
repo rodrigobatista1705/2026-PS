@@ -3,7 +3,7 @@
 # Autor     : Rodrigo Lima dos Sanos Batista
 # Usuario   : rodrigobatista1705
 # Data      : 24/02/2026
-# Descrição : O programa realiza as tarefas de uma calculadora simples com operações de + / * -
+# Descrição : O programa realiza as tarefas de uma calculadora basicas com operações de + - / *
 
 
 def menu(): # Função de Menu
