@@ -1,4 +1,4 @@
-# Converores/ Distancia
+# Converor de Distancia
 
 def km_para_milhas(km):
     return km * 0.621371

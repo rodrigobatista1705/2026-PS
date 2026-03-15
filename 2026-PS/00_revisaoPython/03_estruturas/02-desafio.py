@@ -19,11 +19,11 @@ for i, livro in enumerate(catalogo, start=1):
     print(f"\n{i}  {livro['titulo']} ({livro["ano"]})")
     print(f"  Autor:  {livro['autor']} | {status}")
     print("  "+ "-" *40)
+   
     
 # Adicionar livro
-
 opc = input("\nDeseja adicionar um livro novo? (s/n)").lower()
-if opc =="s":
+if opc =="s": # Se 's' for digitado sera feito uma lista de perguntas sobre o livro que sera adicionado e sera salvo na lista
     titulo = input("Título: ")
     autor = input("Autor: ")
     ano = int(input("Ano: "))
