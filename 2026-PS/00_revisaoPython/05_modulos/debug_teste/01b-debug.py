@@ -1,14 +1,14 @@
 # debug_teste/01b-debug.py
-import Temperatura  
+import temperatura  # importação correta
 
-from conversores import celsius_para_kelvin, converter_distancia
+from conversores import celsius_para_kelvin, converter_distancia # importação errada pois converter distancia é uma pasta  ali está importando arquivos especificos
 resultado = celsius_para_kelvin(25)
 print(f"25°C em K: {resultado}")
 
 from utils.formatador import formatar_resultado
 print(formatar_resultado("teste", 100, "km", 62.1, "mi", "extra"))
 
-from conversores import km_para_milhas
+from conversores import km_para_milhas # Função não existe "km para milha"
 print(f"50 km = {km_para_milhas(50):.2f} mi")
 
-from debug_teste import algo
+from debug_teste import algo # função inesitente
