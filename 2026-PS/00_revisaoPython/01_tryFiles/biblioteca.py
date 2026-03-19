@@ -1,8 +1,55 @@
-catalogo =[
-    {"titulo": "O Programador Pragmático", "autor": "Andrew Hunt", "disponivel": True},
-    {"titulo": "Código Limpo", "autor": "Robert C. Martin", "disponivel": False},
-    {"titulo": "Padrões de Projeto", "autor": "Erich Gamma", "disponivel": True},   
-]
+#catalogo =[
+#    {"titulo": "O Programador Pragmático", "autor": "Andrew Hunt", "disponivel": True},
+#    {"titulo": "Código Limpo", "autor": "Robert C. Martin", "disponivel": False},
+#    {"titulo": "Padrões de Projeto", "autor": "Erich Gamma", "disponivel": True},   ]
+
+# Centralizar o nome evita erros de digitalização em todo o códio
+
+ARQUIVO = "biblioteca.txt"
+SEPARADOR = "|" # separa campos em cada linha do .txt
+
+# Formato dde cada linha no arquivo:
+
+#   titulo|autor|disponivel
+# Exemplo:
+#   Código Limpo|Robert C. Martin|False
+
+def carregar_catalogo():
+    '''Lê o .txt e reconstroi a lista de dicionarios'''
+    catalogo = []
+    try:
+        # 'r' = leitura | encoding='utf-8' garante acenro corretos
+        with open(ARQUIVO, "r", encoding="utf-8") as f:
+            for linha in f:
+                linha = linha.strip()
+                if not linha:       # Ignora linhas vazias
+                    continue
+                partes = linha.split(SEPARADOR)
+                if len(partes) != 3:  #linha malformada -> pula
+                    continue
+                titulo, autor, disponivel_str = partes
+                catalogo.append({
+                    "titulo":   titulo,
+                    "autor":    autor,
+                    # a string "True" no arquivo precisa virar bool true
+                    "disponivel":   disponivel_str=="True"
+                })
+    except FileNotFoundError:
+        pass    # Primeira execução: arquivo ainda não existe - tudo bem
+    return catalogo
+
+def salvar_catalogo(catalogo):
+    '''Grava toda a lista no arquivo .txt'''
+    try:
+        # 'w' = write: cria se não existir, sobrescreve se existir
+        with open(ARQUIVO, "w", encoding="utf-8") as f:
+            for livro in catalogo:
+                linha = f"{{{{livro['titulo']}{SEPARADOR}{livro['autor']}{SEPARADOR}{livro['diponivel']}\n}"
+                f.write(linha)
+        print(f"💾 Catálogo salvo em '{ARQUIVO}'.")
+    except IOError as e:
+        # IOError: disco cheio, permissão negada, etc. 
+        print("❌   Erro ao alvar:  {e}")
 
 def listar_livros():
     '''Exxibe todos os livros com nuemeraçã e status.'''
@@ -80,6 +127,7 @@ def registrar_empretimo():
         else:
             livro["disponivel"] = False
             print(f"✅ Empréstimo de: '{livro['titulo']}' registrado.")
+            #salvar_catalogo()
             
     except ValueError:
         print("❌ Entrada inválida. Digite apenas números.")
@@ -146,3 +194,48 @@ def menu():
             pass
 if __name__=="__main__":
     menu()
+    
+    
+    
+'''
+try:
+    # codigo que pode lançar sem exceção
+    numero = int(input(Digite um numero: ))
+
+except ValueError:
+    # Executado SE ocorrer ValueError no bloco Try(Entrada diferente da pedida EX: pede int e difita um string)
+    print("Isso não é um número")
+    
+excecpt Exception as e:
+    Captura qualquer outra exceção imprevista
+    print(f"erro inesperado {e}")
+    
+else:
+    # Executado SOMENTE se o try terminou em exceção
+    print(f"Número recebido: {numero}")
+    
+finally:
+    #Executado SEMPRE - com ou sem exceção
+    print("Operação Concluida")
+    
+    
+    
+try     ==      Sempre(código principal)    ==      código pode falhar
+
+except      ==      Só ocorre a exceção especifica      ==      Tratar o erro com msg adequada
+
+else    ==      Só se o try terminou sem exceção        ==      Código que depende do sucesso do try
+
+finally     ==      Sempre -- com ou sem exceção        ==      Liberar recurso(arquivos, conexões)
+    
+    
+    
+# Tipos de except
+
+ValueError      ==  int("abc") - tipo correto, conteudo invalido
+
+IndexError      ==  listar[99] - indice fora do intervalo
+
+Exception as e      ==  qualquer outro erro - sempre por último
+
+'''

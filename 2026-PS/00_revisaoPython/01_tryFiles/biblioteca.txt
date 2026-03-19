@@ -1,0 +1,5 @@
+catalogo =[
+    {"titulo": "O Programador Pragmático", "autor": "Andrew Hunt", "disponivel": True},
+    {"titulo": "Código Limpo", "autor": "Robert C. Martin", "disponivel": False},
+    {"titulo": "Padrões de Projeto", "autor": "Erich Gamma", "disponivel": True},   
+]
