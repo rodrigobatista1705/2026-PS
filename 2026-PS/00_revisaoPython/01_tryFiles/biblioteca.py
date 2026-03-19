@@ -43,10 +43,10 @@ def adicionar_livro():
 
 def buscar_livro():
     print("\n===Buscar Livro===")
-    termo = input("Digite título ou autor: ").strip().lower()
+    termo = input("Digite parte do título: ").strip().lower()
     
     try:
-        resultados = [l for l in catalogo if termo in ["titulo"].lower()]
+        resultados = [l for l in catalogo if termo in l["titulo"].lower()]
         
         if not resultados:
             print("Nenhum livro encontrado.")
@@ -120,7 +120,7 @@ def menu():
     }
     while True:
         print("\nOpções:")
-        for chave, (descricao, _) in opcoes.item():
+        for chave, (descricao, _) in opcoes.items():
             print(f" [{chave}] {descricao}")
             
         try:
@@ -139,3 +139,10 @@ def menu():
                 break
             _, funcao = opcoes[escolha]
             funcao()
+        
+        finally:
+            # Executado SEMPRE - com ou sem exceção
+            # Aqui: didático. Em produção: fecha arquivos, conexões, etc.
+            pass
+if __name__=="__main__":
+    menu()
