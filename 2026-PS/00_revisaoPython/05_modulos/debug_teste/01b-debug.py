@@ -1,5 +1,5 @@
 # debug_teste/01b-debug.py
-import temperatura  # importação correta
+import #temperatura   importação correta
 
 from conversores import celsius_para_kelvin, converter_distancia # importação errada pois converter distancia é uma pasta  ali está importando arquivos especificos
 resultado = celsius_para_kelvin(25)

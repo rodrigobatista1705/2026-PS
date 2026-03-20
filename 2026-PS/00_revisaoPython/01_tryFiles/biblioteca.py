@@ -1,14 +1,11 @@
-#catalogo =[
-#    {"titulo": "O Programador Pragmático", "autor": "Andrew Hunt", "disponivel": True},
-#    {"titulo": "Código Limpo", "autor": "Robert C. Martin", "disponivel": False},
-#    {"titulo": "Padrões de Projeto", "autor": "Erich Gamma", "disponivel": True},   ]
-
 # Centralizar o nome evita erros de digitalização em todo o códio
 
-ARQUIVO = "biblioteca.txt"
+import os
+ARQUIVO = os.path.join(os.path.dirname(__file__), "biblioteca.txt")
+#ARQUIVO = "biblioteca.txt"
 SEPARADOR = "|" # separa campos em cada linha do .txt
 
-# Formato dde cada linha no arquivo:
+# Formato de cada linha no arquivo:
 
 #   titulo|autor|disponivel
 # Exemplo:
@@ -44,14 +41,15 @@ def salvar_catalogo(catalogo):
         # 'w' = write: cria se não existir, sobrescreve se existir
         with open(ARQUIVO, "w", encoding="utf-8") as f:
             for livro in catalogo:
-                linha = f"{{{{livro['titulo']}{SEPARADOR}{livro['autor']}{SEPARADOR}{livro['diponivel']}\n}"
+                linha = f"{livro['titulo']}{SEPARADOR}{livro['autor']}{SEPARADOR}{livro['disponivel']}\n"
                 f.write(linha)
         print(f"💾 Catálogo salvo em '{ARQUIVO}'.")
     except IOError as e:
         # IOError: disco cheio, permissão negada, etc. 
         print("❌   Erro ao alvar:  {e}")
 
-def listar_livros():
+
+def listar_livros(catalogo):
     '''Exxibe todos os livros com nuemeraçã e status.'''
     print("\n"+ "=" *50)
     print(" 📚CATÁLOGO DA BIBLIOTECA")
@@ -67,9 +65,9 @@ def listar_livros():
         
     print("=" * 50)
     
-#listar_livros()
+    
 
-def adicionar_livro():
+def adicionar_livro(catalogo):
     """Coleta dados via input e aiciona um novo livro ao catálogo."""
     print("\n===Adicionar Novo Livro===")
     
@@ -86,9 +84,11 @@ def adicionar_livro():
         "disponivel": True
     })
     print(f"✅ '{titulo}' adicionado com sucesso!")
-#adicionar_livro()   
+    #salv-catalogo porque será adicionado um novo livrro e deve ser mudado no arquivo .txt
+    salvar_catalogo(catalogo)   
 
-def buscar_livro():
+
+def buscar_livro(catalogo):
     print("\n===Buscar Livro===")
     termo = input("Digite parte do título: ").strip().lower()
     
@@ -103,11 +103,13 @@ def buscar_livro():
         for livro in resultados:
             status = "Disponivel" if livro["disponivel"] else "Emprestado"
             print(f"    🔹{livro['titulo']} - {livro['autor']} [{status}]")
+
             
     except Exception as e:
         print(f"❌    Erro ao buscar livro: {e}")
+    
         
-def registrar_empretimo():
+def registrar_empretimo(catalogo):
     listar_livros()
     if not catalogo:
         return
@@ -127,14 +129,14 @@ def registrar_empretimo():
         else:
             livro["disponivel"] = False
             print(f"✅ Empréstimo de: '{livro['titulo']}' registrado.")
-            #salvar_catalogo()
+            #salva o catálogo porque o status do livro mudou para indisponível
+            salvar_catalogo(catalogo)
             
     except ValueError:
         print("❌ Entrada inválida. Digite apenas números.")
-#registrar_empretimo()
 
 
-def devolver_livro():
+def devolver_livro(catalogo):
     listar_livros()
     if not catalogo:
         return
@@ -149,14 +151,20 @@ def devolver_livro():
         else:
             livro["disponivel"] = True
             print(f"    ✅ Devolução de: '{livro['titulo']}' registrada.")
+            salvar_catalogo(catalogo)    # Salva o catálogo porque o status do livro mudou para disponível
             
     except ValueError:
         print("❌  Digite apenas números.")
     except IndexError:
         print(" ❌ Número fora da lista. Verifique os livros cadastrados.")
         
+        
 def menu():
-    print("\n📚 SISTEMA DE BIBLIOTECA -v1(em memória)")
+    # Carrega do arquivo ao iniciar- memório persitente
+    catalogo = carregar_catalogo()
+    total = len(catalogo)
+    print("\n📚 SISTEMA DE BIBLIOTECA -v2(com persistência)")
+    print(f"{total} livro(s) carregados(s) de '{ARQUIVO}'.")
     
     opcoes = {
         "1": ("Listar livros", listar_livros),
@@ -186,7 +194,7 @@ def menu():
                 print("\n Até logo! 📚")
                 break
             _, funcao = opcoes[escolha]
-            funcao()
+            funcao(catalogo)    # passa catalogo como argumento
         
         finally:
             # Executado SEMPRE - com ou sem exceção
