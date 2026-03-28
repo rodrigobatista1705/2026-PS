@@ -11,14 +11,18 @@ SEPARADOR = "|" # separa campos em cada linha do .txt
 # Exemplo:
 #   Código Limpo|Robert C. Martin|False
 
+'''Função'''
 def carregar_catalogo():
     '''Lê o .txt e reconstroi a lista de dicionarios'''
     catalogo = []
+    '''Try/Except'''
     try:
         # 'r' = leitura | encoding='utf-8' garante acenro corretos
         with open(ARQUIVO, "r", encoding="utf-8") as f:
+            '''repetição'''
             for linha in f:
                 linha = linha.strip()
+                '''condição'''
                 if not linha:       # Ignora linhas vazias
                     continue
                 partes = linha.split(SEPARADOR)
@@ -34,6 +38,7 @@ def carregar_catalogo():
     except FileNotFoundError:
         pass    # Primeira execução: arquivo ainda não existe - tudo bem
     return catalogo
+
 
 def salvar_catalogo(catalogo):
     '''Grava toda a lista no arquivo .txt'''
@@ -71,6 +76,7 @@ def adicionar_livro(catalogo):
     """Coleta dados via input e aiciona um novo livro ao catálogo."""
     print("\n===Adicionar Novo Livro===")
     
+    """entradas = string, int"""
     titulo = input("Título: ").strip()
     autor = input("Autor: ").strip()
     
