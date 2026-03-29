@@ -3,12 +3,12 @@
 # Agenda de contatos ou compromissos
 # O programa deve permitir ao usuário criar, ler, atualizar e excluir contatos ou compromissos.
 #   26/03/2026
-#   Autores: Rodrigo Lima dos SAnto Batista e Ellis Moura
+#   Autores: Rodrigo Lima dos Santos Batista e Ellis Moura
 #   Programação de Sistemas - Prof. Berssa
 
 import os 
+# Acessa a pasta do arquivo atual e cria o caminho para o arquivo de dados
 ARQUIVO = os.path.join(os.path.dirname(__file__), "dados.txt")
-#ARQUIVO = "dados.txt"
 SEPARADOR = "/"
 
 #   Formato .txt
@@ -19,10 +19,12 @@ SEPARADOR = "/"
 
 def carregar_dados():
     agenda_carregada = []
+    # Verifica se o arquivo existe antes de tentar ler
     if not os.path.exists(ARQUIVO):
         return agenda_carregada
     
     try:
+        # Abre o arquivo para leitura e processa cada linha
         with open(ARQUIVO, "r", encoding="utf-8") as f:
             for linha in f:
                 partes = linha.strip().split(SEPARADOR)
@@ -40,6 +42,7 @@ def carregar_dados():
 # Função salvar dados .txt
 def salvar_dados(agenda): # Grava a lista
     try:
+        # Abre o arquivo para escrita e salva cada item da agenda no formato definido
         with open(ARQUIVO, "w", encoding="utf-8") as f:
             for item in agenda:
                 if item['tipo'] == 'contato':
@@ -63,6 +66,7 @@ def listar_agenda(agenda):
         print(" Agenda vazia.")
         return
     
+    # Exibe cada item da agenda com formatação diferente para contatos e compromissos
     for i, item in enumerate(agenda, 1):
         if item['tipo'] == 'contato':
             print(f" {i}. 📞 {item['pessoa']} - {item['telefone']}")
@@ -119,9 +123,9 @@ def excluir_item(agenda):
     if not agenda:
         return
     try:
-        idx = int(input("Número do item para excluir: ")) - 1
-        if 0 <= idx < len(agenda):
-            removido = agenda.pop(idx)
+        ie = int(input("Número do item para excluir: ")) - 1
+        if 0 <= ie < len(agenda):
+            removido = agenda.pop(ie)
             salvar_dados(agenda)
             print(f"🗑️ Item removido com sucesso!")
         else:
@@ -134,9 +138,9 @@ def excluir_item(agenda):
 def atualizar_agenda(agenda):
     listar_agenda(agenda)
     try:
-        idx = int(input("Número do item para atualizar: ")) - 1
-        if 0 <= idx < len(agenda):
-            item = agenda[idx]
+        ia = int(input("Número do item para atualizar: ")) - 1
+        if 0 <= ia < len(agenda):
+            item = agenda[ia]
             print(f"Deixe em branco para manter o valor atual.")
             
             if item['tipo'] == 'contato':
@@ -213,4 +217,37 @@ try/except
 Arquivo.txt
 --Leitura: with open(ARQUIVO, "r", encoding="utf-8") as f:
 --Escrita: with open(ARQUIVO, "w", encoding="utf-
+'''
+
+
+'''
+Uso de IA: copilot automatico do github para completar escrita  de codigos.
+
+Uso do copilot para correção de bugs, e auxilo para encontrar melhorias(prinicpalmente na parte de entrada e salvamento de dados)
+
+Uso de outros projetos prontos como base para construção do projeto final
+'''
+
+
+'''
+Função de cada parte do código:
+
+--carregar_dados: Lê os dados do arquivo .txt e carrega na agenda
+
+--salvar_dados: Salva os dados da agenda no arquivo .txt
+
+--listar_agenda: Exibe os contatos e compromissos da agenda
+
+--adicionar_contato: Permite adicionar um novo contato à agenda
+
+--adicionar_compromisso: Permite adicionar um novo compromisso à agenda
+
+--buscar_agenda: Permite buscar contatos ou compromissos por nome ou descrição
+
+--excluir_item: Permite excluir um item da agenda
+
+--atualizar_agenda: Permite atualizar os detalhes de um contato ou compromisso existente
+
+--main: Função principal que gerencia o fluxo do programa e exibe o menu de opções para o usuário
+
 '''
