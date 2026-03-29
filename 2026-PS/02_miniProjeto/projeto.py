@@ -3,7 +3,7 @@
 # Agenda de contatos ou compromissos
 # O programa deve permitir ao usuário criar, ler, atualizar e excluir contatos ou compromissos.
 #   26/03/2026
-#   Autores: Rodrigo Lima dos Santos Batista e Ellis Moura
+#   Autores: Rodrigo Lima dos Santos Batista, Ellis Moura e Fernando Henrique Ramos
 #   Programação de Sistemas - Prof. Berssa
 
 import os 
@@ -227,7 +227,6 @@ Uso do copilot para correção de bugs, e auxilo para encontrar melhorias(prinic
 
 Uso de outros projetos prontos como base para construção do projeto final
 '''
-
 
 '''
 Função de cada parte do código:
