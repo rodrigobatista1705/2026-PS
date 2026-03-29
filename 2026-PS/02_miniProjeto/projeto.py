@@ -70,10 +70,9 @@ def listar_agenda(agenda):
     for i, item in enumerate(agenda, 1):
         if item['tipo'] == 'contato':
             print(f" {i}. 📞 {item['pessoa']} - {item['telefone']}")
-        else:
+        elif item['tipo'] == 'compromisso':
             print(f" {i}. 📅 {item['descricao']} - {item['data']} às {item['hora']}")
-
-            print("-" * 50)
+        print("-" * 50)  
 
 
 #Função adicionar contato
@@ -81,7 +80,7 @@ def adicionar_contato(agenda):
     '''Coleta dados input e adiciona um novo contato'''
     pessoa = input("Nome: ").strip()
     
-    print("Digite seu número de telefone (apenas dígitos, ex: 999999999): \n")
+    print("Digite seu número de telefone (apenas , ex: 999999999): \n")
     telefone = input("Telefone: ").strip()
     
     if pessoa and telefone:
