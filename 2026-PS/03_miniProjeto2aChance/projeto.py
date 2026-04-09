@@ -1,15 +1,15 @@
 '''
         Agenda de Pacientes e Consultas para Clínica
 
---O programa serve para uma clina ter uma agenda de consultas com horario nome e telefone do cliente, e a clinica pode adicionar, excluir, atualizar e buscar os contatos e consultas.
+-- O programa serve para uma clina ter uma agenda de consultas com horario nome e telefone do cliente, e a clinica pode adicionar, excluir, atualizar e buscar os contatos e consultas.
    
---26/03/2026
+-- 26/03/2026
 
---Autores: Rodrigo Lima dos Santos Batista, Ellis Moura e Fernando Henrique Ramos
+-- Autores: Rodrigo Lima dos Santos Batista, Ellis Moura e Fernando Henrique Ramos
 
---Programação de Sistemas - Prof. Berssa
+-- Programação de Sistemas - Prof. Berssa
 
---Link do repositório: https://github.com/rodrigobatista1705/2026-PS.git
+-- Link do repositório: https://github.com/rodrigobatista1705/2026-PS.git
 
 '''
 
