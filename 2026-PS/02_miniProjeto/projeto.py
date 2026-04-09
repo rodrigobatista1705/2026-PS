@@ -1,6 +1,4 @@
-
-
-# Agenda de contatos ou compromissos
+#   Agenda de Pacientes e Consultas para Clínica
 #   O programa serve para uma clina ter uma agenda de compromissos com horario nome e telefone do cliente, e a clinica pode adicionar, excluir, atualizar e buscar os contatos e compromissos.
 #   26/03/2026
 #   Autores: Rodrigo Lima dos Santos Batista, Ellis Moura e Fernando Henrique Ramos
@@ -8,6 +6,7 @@
 
 
 import os 
+
 # Acessa a pasta do arquivo atual e cria o caminho para o arquivo de dados
 ARQUIVO = os.path.join(os.path.dirname(__file__), "dados.txt")
 SEPARADOR = "/"
@@ -68,7 +67,6 @@ def salvar_dados(agenda):
 
 
 
-
 # Função Listar agenda
 def listar_agenda(agenda):
     print("\n" + "=" * 50)
@@ -83,7 +81,14 @@ def listar_agenda(agenda):
         print(f"{i}. 👤 {item['pessoa']} - Tel: {item['telefone']}")
         if "consultas" in item:
             for c in item["consultas"]:
-                print(f"    📅 Consulta: {c['descricao']} - {c['data']} às {c['hora']}")
+                # Formata data como dd/mm/aaaa
+                data_formatada = f"{c['data'][:2]}/{c['data'][2:4]}/{c['data'][4:]}"  
+
+                # Formata hora como hh:mm
+                hora_formatada = f"{c['hora'][:2]}:{c['hora'][2:]}"  
+
+                print(f"    📅 Consulta: {c['descricao']} - {data_formatada} às {hora_formatada}")
+
         print("-" * 50)
 
 
@@ -92,7 +97,13 @@ def listar_agenda(agenda):
 # Função adicionar paciente com consulta dentro dele
 def adicionar_paciente(agenda):
     nome = input("Nome do paciente: ").strip()
-    telefone = input("Telefone do paciente: ").strip()
+    try:
+        telefone = input("Telefone do paciente: ").strip()
+        if not telefone.isdigit():
+            raise ValueError("Telefone deve conter apenas números.")
+    except ValueError as e:
+        print(f"❌ {e}")
+        return
     
     if nome and telefone:
         paciente = {"tipo": "paciente", "pessoa": nome, "telefone": telefone}
@@ -101,8 +112,17 @@ def adicionar_paciente(agenda):
         escolha = input("Deseja agendar uma consulta para este paciente? (s/n): ").strip().lower()
         if escolha == "s":
             desc = input("Descrição da consulta: ").strip()
-            data = input("Data (dd/mm/aaaa): ").strip()
-            hora = input("Hora (hh:mm): ").strip()
+            try:
+                data = input("Data (ddmmaaaa): ").strip()
+                if not data.isdigit():
+                    raise ValueError("Data deve conter apenas números (ddmmaaaa).") 
+                hora = input("Hora (hhmm): ").strip()
+                if not hora.isdigit():
+                    raise ValueError("Hora deve conter apenas números (hhmm).")
+            except ValueError as e:
+                print(f"❌ {e}")
+                return
+
             if desc and data and hora:
                 paciente["consulta"] = {"descricao": desc, "data": data, "hora": hora}
                 print(f"✅ Consulta para '{nome}' adicionada com sucesso!")
@@ -130,8 +150,17 @@ def adicionar_consulta(agenda):
             paciente = agenda[idx]
             if paciente['tipo'] == 'paciente':
                 desc = input("Descrição da consulta: ").strip()
-                data = input("Data (dd/mm/aaaa): ").strip()
-                hora = input("Hora (hh:mm): ").strip()
+                try:
+                    data = input("Data (ddmmaaaa): ").strip()
+                    if not data.isdigit():
+                        raise ValueError("Data deve conter apenas números (ddmmaaaa).")
+
+                    hora = input("Hora (hhmm): ").strip()
+                    if not hora.isdigit():
+                        raise ValueError("Hora deve conter apenas números (hhmm).")
+                except ValueError as e:
+                    print(f"❌ {e}")
+                    return
                 
                 if desc and data and hora:
                     # cria lista de consultas se não existir
@@ -193,11 +222,28 @@ def atualizar_agenda(agenda):
             
             if item['tipo'] == 'paciente':
                 item['pessoa'] = input(f"Novo nome [{item['pessoa']}]: ") or item['pessoa']
-                item['telefone'] = input(f"Novo telefone [{item['telefone']}]: ") or item['telefone']
+                novo_tel = input(f"Novo telefone [{item['telefone']}]: ").strip()
+                try:
+                    if novo_tel and not novo_tel.isdigit():
+                        raise ValueError("Telefone deve conter apenas números.")
+                    item['telefone'] = novo_tel or item['telefone']
+                except ValueError as e:
+                    print(f"❌ {e}")
+                    return
             else:
                 item['descricao'] = input(f"Nova desc. [{item['descricao']}]: ") or item['descricao']
-                item['data'] = input(f"Nova data [{item['data']}]: ") or item['data']
-                item['hora'] = input(f"Nova hora [{item['hora']}]: ") or item['hora']
+               
+            try:
+                nova_data = input("Data (ddmmaaaa): ").strip()
+                if not nova_data.isdigit():
+                    raise ValueError("Data deve conter apenas números (ddmmaaaa).") 
+                nova_hora = input("Hora (hhmm): ").strip()
+                if not nova_hora.isdigit():
+                    raise ValueError("Hora deve conter apenas números (hhmm).")
+            except ValueError as e:
+                print(f"❌ {e}")
+                return
+
             
             salvar_dados(agenda)
             print("✅ Atualizado!")
@@ -242,13 +288,18 @@ if __name__ == "__main__":
             
 ''' 
 Tipos de variaveis:
---String: SEPARADOR = "/"
---Lista: agenda = []
---Int: idx = int(input("Número do item para excluir: ")) - 1
+--String: SEPARADOR = "/"       linha 12
+    * String é usada para armazenar texto, como o separador usado para dividir os campos no arquivo de dados.
+--Lista: agenda = []        linha 21
+    * Lista é usada para armazenar múltiplos itens, como os pacientes e consultas na agenda.
+--Dict: paciente = {"tipo": "paciente", "pessoa": nome, "telefone": telefone}
+    * Dicionário é usado para armazenar informações estruturadas sobre um paciente, incluindo seu tipo, nome e telefone.
 
 Operadores:
---Atribuição: escolha == "0"
---Comparação: if escolha == "0":
+--Atribuição: SEPARADOR = "/"            linha 12
+--Comparação: if escolha == "0":         linha 128
+--
+                
 
 Estruturas de controle:
 --Condicional: if escolha == "0":
