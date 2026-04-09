@@ -20,7 +20,7 @@ ARQUIVO = os.path.join(os.path.dirname(__file__), "dados.txt")
 SEPARADOR = "/"
 
 #   Formato .txt
-# Pessoa/numero/compromisso
+# Pessoa/numero/descricao/data/hora/descricao/data/hora/...
 
 
 
@@ -107,7 +107,7 @@ def adicionar_paciente(agenda):
     nome = input("Nome do paciente: ").strip()
     try:
         telefone = input("Telefone do paciente: ").strip()
-        if not telefone.isdigit():
+        if not telefone.isdigit() or len(telefone) != 11:          #.isdigt serve para verificar se a string contém apenas dígitos, ou seja, se é um número válido.
             raise ValueError("Telefone deve conter apenas números.")
     except ValueError as e:
         print(f"❌ {e}")
@@ -122,17 +122,21 @@ def adicionar_paciente(agenda):
             desc = input("Descrição da consulta: ").strip()
             try:
                 data = input("Data (ddmmaaaa): ").strip()
-                if not data.isdigit():
-                    raise ValueError("Data deve conter apenas números (ddmmaaaa).") 
+                if not data.isdigit() or len(data) != 8:
+                    raise ValueError("Data deve conter apenas 8 números (ddmmaaaa).") 
                 hora = input("Hora (hhmm): ").strip()
-                if not hora.isdigit():
-                    raise ValueError("Hora deve conter apenas números (hhmm).")
+                if not hora.isdigit() or len(hora) != 4:
+                    raise ValueError("Hora deve conter apenas 4 números (hhmm).")
             except ValueError as e:
                 print(f"❌ {e}")
                 return
 
             if desc and data and hora:
-                paciente["consulta"] = {"descricao": desc, "data": data, "hora": hora}
+                paciente.setdefault("consultas", []).append({
+                    "descricao": desc,
+                    "data": data,
+                    "hora": hora
+                })
                 print(f"✅ Consulta para '{nome}' adicionada com sucesso!")
             else:
                 print("❌ Campos obrigatórios da consulta não preenchidos.")
@@ -160,12 +164,12 @@ def adicionar_consulta(agenda):
                 desc = input("Descrição da consulta: ").strip()
                 try:
                     data = input("Data (ddmmaaaa): ").strip()
-                    if not data.isdigit():
-                        raise ValueError("Data deve conter apenas números (ddmmaaaa).")
+                    if not data.isdigit() or len(data) != 8:
+                        raise ValueError("Data deve conter apenas 8 números (ddmmaaaa).")
 
                     hora = input("Hora (hhmm): ").strip()
-                    if not hora.isdigit():
-                        raise ValueError("Hora deve conter apenas números (hhmm).")
+                    if not hora.isdigit() or len(hora) != 4:
+                        raise ValueError("Hora deve conter apenas 4 números (hhmm).")
                 except ValueError as e:
                     print(f"❌ {e}")
                     return
@@ -202,7 +206,7 @@ def buscar_agenda(agenda):
         print("🔍 Nada encontrado.")
         
         
-# Função excluir paciente ou consulta
+# Função excluir paciente
 def excluir_item(agenda):
     listar_agenda(agenda)
     if not agenda:
@@ -230,10 +234,10 @@ def atualizar_agenda(agenda):
             
             if item['tipo'] == 'paciente':
                 item['pessoa'] = input(f"Novo nome [{item['pessoa']}]: ") or item['pessoa']
-                novo_tel = input(f"Novo telefone [{item['telefone']}]: ").strip()
+                novo_tel = input(f"Novo telefone [{item['telefone']}]: ").strip() or item['telefone']
                 try:
-                    if novo_tel and not novo_tel.isdigit():
-                        raise ValueError("Telefone deve conter apenas números.")
+                    if novo_tel and (not novo_tel.isdigit() or len(novo_tel) != 11):
+                        raise ValueError("Telefone deve conter apenas números (11 dígitos).")
                     item['telefone'] = novo_tel or item['telefone']
                 except ValueError as e:
                     print(f"❌ {e}")
@@ -242,10 +246,10 @@ def atualizar_agenda(agenda):
                 item['descricao'] = input(f"Nova desc. [{item['descricao']}]: ") or item['descricao']
                
             try:
-                nova_data = input("Data (ddmmaaaa): ").strip()
+                nova_data = input("Data (ddmmaaaa): ").strip() or item['data']
                 if not nova_data.isdigit():
                     raise ValueError("Data deve conter apenas números (ddmmaaaa).") 
-                nova_hora = input("Hora (hhmm): ").strip()
+                nova_hora = input("Hora (hhmm): ").strip() or item['hora']
                 if not nova_hora.isdigit():
                     raise ValueError("Hora deve conter apenas números (hhmm).")
             except ValueError as e:
@@ -257,6 +261,11 @@ def atualizar_agenda(agenda):
             print("✅ Atualizado!")
     except ValueError:
         print("❌ Entrada inválida.")
+    
+    
+    
+    
+    # Função principal
     
 def main():
     agenda = carregar_dados()
@@ -298,8 +307,13 @@ if __name__ == "__main__":
 Tipos de variaveis:
 --String: SEPARADOR = "/"       linha 12
     * String é usada para armazenar texto, como o separador usado para dividir os campos no arquivo de dados.
+    
+--Int: idx = int(input("Número do paciente para adicionar consulta: ")) - 1       linha 143
+    * Inteiro é usado para armazenar números inteiros, como o índice do paciente selecionado para adicionar uma consulta.
+    
 --Lista: agenda = []        linha 21
     * Lista é usada para armazenar múltiplos itens, como os pacientes e consultas na agenda.
+
 --Dict: paciente = {"tipo": "paciente", "pessoa": nome, "telefone": telefone}
     * Dicionário é usado para armazenar informações estruturadas sobre um paciente, incluindo seu tipo, nome e telefone.
 
@@ -336,10 +350,13 @@ Função
 
 
 try/except
---try: 
-    telefone = input("Digite um número: ")
---except ValueError:
-    print("❌ Digite um número.")
+try:
+    telefone = input("Telefone do paciente: ").strip()
+    if not telefone.isdigit():          
+        raise ValueError("Telefone deve conter apenas números.")
+except ValueError as e:
+    print(f"❌ {e}")
+    return
 
 
     
