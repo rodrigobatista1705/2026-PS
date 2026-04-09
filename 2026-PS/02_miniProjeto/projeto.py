@@ -1,9 +1,17 @@
-#   Agenda de Pacientes e Consultas para Clínica
-#   O programa serve para uma clina ter uma agenda de compromissos com horario nome e telefone do cliente, e a clinica pode adicionar, excluir, atualizar e buscar os contatos e compromissos.
-#   26/03/2026
-#   Autores: Rodrigo Lima dos Santos Batista, Ellis Moura e Fernando Henrique Ramos
-#   Programação de Sistemas - Prof. Berssa
+'''
+        Agenda de Pacientes e Consultas para Clínica
 
+--O programa serve para uma clina ter uma agenda de consultas com horario nome e telefone do cliente, e a clinica pode adicionar, excluir, atualizar e buscar os contatos e consultas.
+   
+--26/03/2026
+
+--Autores: Rodrigo Lima dos Santos Batista, Ellis Moura e Fernando Henrique Ramos
+
+--Programação de Sistemas - Prof. Berssa
+
+--Link do repositório: https://github.com/rodrigobatista1705/2026-PS.git
+
+'''
 
 import os 
 
@@ -295,29 +303,53 @@ Tipos de variaveis:
 --Dict: paciente = {"tipo": "paciente", "pessoa": nome, "telefone": telefone}
     * Dicionário é usado para armazenar informações estruturadas sobre um paciente, incluindo seu tipo, nome e telefone.
 
+
+
 Operadores:
 --Atribuição: SEPARADOR = "/"            linha 12
+    * O operador de atribuição é usado para atribuir um valor a uma variável, como o separador para o arquivo de dados.
+    
 --Comparação: if escolha == "0":         linha 128
---
-                
+    * O operador de comparação é usado para comparar valores, como verificar se a escolha do usuário é "0" para sair do programa.
+    
+--Lógicos: if nome and telefone:          linha 108
+    * O operador lógico "and" é usado para verificar se ambos os campos, nome e telefone, foram preenchidos antes de adicionar um paciente à agenda.
+    
+                    
 
 Estruturas de controle:
 --Condicional: if escolha == "0":
+    * A estrutura condicional "if" é usada para executar um bloco de código apenas se uma condição for verdadeira, como verificar a escolha do usuário no menu.
+    
 --Laço de repetição: while True:
-
+    * O laço de repetição "while" é usado para criar um loop que continua executando até que uma condição de parada seja atendida, como quando o usuário escolhe sair do programa.
+    
+    
+    
 Função
 --Definição: def listar_agenda(agenda):
+    * A definição de função é usada para criar uma função nomeada que pode ser chamada posteriormente, como a função listar_agenda que exibe os contatos e compromissos da agenda.
+    
 --Chamada: listar_agenda(encontrados)
+    * A chamada de função é usada para executar o código dentro de uma função, como chamar listar_agenda para exibir os resultados encontrados na busca.
+
+
 
 try/except
 --try: 
     telefone = input("Digite um número: ")
 --except ValueError:
     print("❌ Digite um número.")
+
+
     
 Arquivo.txt
 --Leitura: with open(ARQUIVO, "r", encoding="utf-8") as f:
---Escrita: with open(ARQUIVO, "w", encoding="utf-
+    * O modo de leitura "r" é usado para abrir o arquivo de dados e ler seu conteúdo para carregar a agenda.
+    
+--Escrita: with open(ARQUIVO, "w", encoding="utf-8") as f:
+    * O modo de escrita "w" é usado para abrir o arquivo de dados e escrever nele, para salvar a agenda.
+
 '''
 
 
@@ -340,13 +372,13 @@ Função de cada parte do código:
 
 --adicionar_paciente_com_consulta: Permite adicionar um novo paciente e opcionalmente uma consulta para esse paciente
 
---adicionar_compromisso: Permite adicionar um novo compromisso à agenda
+--adicionar_consulta: Permite adicionar uma nova consulta a um paciente existente na agenda
 
---buscar_agenda: Permite buscar contatos ou compromissos por nome ou descrição
+--buscar_agenda: Permite buscar pacientes ou consultas por nome ou descrição
 
 --excluir_item: Permite excluir um item da agenda
 
---atualizar_agenda: Permite atualizar os detalhes de um contato ou compromisso existente
+--atualizar_agenda: Permite atualizar os detalhes de um contato ou consulta existente
 
 --main: Função principal que gerencia o fluxo do programa e exibe o menu de opções para o usuário
 
