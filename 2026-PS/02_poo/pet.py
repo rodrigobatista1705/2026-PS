@@ -2,7 +2,7 @@
 # Disciplina : Programação de Sistemas
 # Autor     : Rodrigo Lima dos Sanos Batista
 # Usuario   : rodrigobatista1705
-# Data      : 24/02/2026
+# Data      : 05/05/2026
 # Conceito  : Classe, objeto, atributos, métodos, encapsulamento
 
 class Pet:
@@ -86,23 +86,24 @@ pet2 = Pet("Mimi", "Gato", 2, "Siamês", "João", 4.2, "muito preguiçosa", True
 pet3 = Pet("Thor", "Cachorro", 11, "Vira-Lata", "Ana", 18.0, "muito agressivo", False)
 pet4 = Pet("Luna", "Gato", 3, "Persa", "Carlos", 3.5, "muito carinhosa", True)
 
-pet1.exibir_dados()
-pet1.registrar_entrada()
-pet1.verificar_vacinacao()   
-pet1.emitir_resumo()
+pets = [pet1, pet2]
 
-
-pet2.exibir_dados()
-pet2.registrar_entrada()
-pet2.verificar_vacinacao()   
-pet2.emitir_resumo()
+for pet in pets:
+    pet.exibir_dados()
+    pet.registrar_entrada()
+    pet.verificar_vacinacao()
+    print("Diária: R$", pet.calcular_diaria())
+    pet.emitir_resumo()
 
 pet3.exibir_dados()
 pet3.registrar_entrada()
 pet3.verificar_vacinacao()   
-pet3.emitir_resumo()
+pet3.atualizar_peso(19.0)
+pet3.registrar_saida()
 
 pet4.exibir_dados()
 pet4.registrar_entrada()
 pet4.verificar_vacinacao()
+print("Diária: R$", pet4.calcular_diaria())
 pet4.emitir_resumo()
+pet4.registrar_saida()
