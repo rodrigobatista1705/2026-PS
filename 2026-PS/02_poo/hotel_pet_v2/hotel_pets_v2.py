@@ -93,8 +93,8 @@ class Pet:
         print(f"Valor da diária: {self.calcular_diaria()} R$")
         
     # quando uma função esta dentro da clase ela não pode ser acessada no menu ou seja crie uma função para o menu 
-    def atualiar_pet(self, PETs):
-        print("\npeso atual {self.peso}kg de : {self.nome}")
+    def atualizar_peso(self):
+        print(f"\npeso atual de {self.nome}: {self.peso} kg")
         novo_peso = float(input("DIgite o novo peso(kg): "))
         self.peso = novo_peso
         print(f"O peso foi atualizado para {self.peso} kg.")
@@ -110,20 +110,35 @@ class Pet:
     
  # arrumar   
 def atualizar_peso_pet(PETs):
-    len
+    if not PETs:
+        print("\nNenhum pet cadastrado.")
+        return
+    listar(PETs)
     indice = int(input("\nN° do pet para atualizar o peso: ")) - 1
     if 0 <= indice < len(PETs):
-        PETs[indice].atualizar_peso.()
+        PETs[indice].atualizar_peso()
+        salvar_em_text(PETs, ARQUIVO)
+        salvar_em_binario(PETs, ARQUIVOB)
+    else:
+        print("Índice inválido.")
         
         
 def verificar_vacinacao_pet(PETs):
+    if not PETs:
+        print("\nNenhum pet cadastrado.")
+        return
     listar(PETs)
     indice = int(input("\nN° do pet para verificar vacinação: ")) - 1
     if 0 <= indice < len(PETs):
         PETs[indice].verificar_vacinacao()
+    else:
+        print("Índice inválido.")
 
 
 def registrar_entrada_pet(PETs):
+    if not PETs:
+        print("\nNenhum pet cadastrado.")
+        return
     listar(PETs)
     indice = int(input("\nN° do pet para registrar entrada: ")) - 1
     if 0 <= indice < len(PETs):
@@ -133,6 +148,9 @@ def registrar_entrada_pet(PETs):
         salvar_em_binario(PETs, ARQUIVOB)
     
 def registrar_saida_pet(PETs):
+    if not PETs:
+        print("\nNenhum pet cadastrado.")
+        return
     listar(PETs)
     indice = int(input("\nN° do pet para registrar saída: ")) - 1
     if 0 <= indice < len(PETs):
