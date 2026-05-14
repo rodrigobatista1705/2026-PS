@@ -24,23 +24,26 @@ class Contato:
     def para_linha_txt(self):
         return f"{self.nome};{self.telefone};{self.email}"
     
+import os
+    
+ARQUIVOtxt = os.path.join(os.path.dirname(__file__), "agenda.txt")    
+ARQUIVObin = os.path.join(os.path.dirname(__file__), "agenda.bin")
 
 # Função para salvar em text
         
-def salvar_em_text(contatos, caminho):
-    with open(caminho, "w", encoding="utf-8") as arquivo:
+def salvar_em_text(contatos, ARQUIVOtxt):
+    with open(ARQUIVOtxt, "w", encoding="utf-8") as arquivo:
         for c in contatos:
             linha = f"{c.nome};{c.telefone};{c.email}"
             arquivo.write(linha + "\n")
-    print(f"✔️  {len(contatos)} contato(s) salvo(s) em {caminho}")
-    
+    print(f"✔️  {len(contatos)} contato(s) salvo(s) em {ARQUIVOtxt}")
     
     # Função para carregar do .txt
     
-def carregar_de_txt(caminho):
+def carregar_de_txt(ARQUIVOtxt):
     contatos=[]
     try:
-        with open(caminho, "r", encoding="utf-8") as arquivo:
+        with open(ARQUIVOtxt, "r", encoding="utf-8") as arquivo:
             for linha in arquivo:
                 linha = linha.strip()
                 if not linha:
@@ -49,26 +52,27 @@ def carregar_de_txt(caminho):
                 nome, telefone, email = partes[0], partes[1], partes[2]
                 contatos.append(Contato(nome, telefone, email))
     except FileNotFoundError:
-        print(f"Arquivo {caminho} ainda não existe. Começando vazio.")
+        print(f"Arquivo {ARQUIVOtxt} ainda não existe. Começando vazio.")
     return contatos    
 
 
     # Função para salvar dados usando pickle
     
-def salvar_em_binario(contatos, caminho):
-    with open(caminho, "wb") as arquivo:
+def salvar_em_binario(contatos, ARQUIVObin):
+    with open(ARQUIVObin, "wb") as arquivo:
         pickle.dump(contatos, arquivo)
-    print(f"✔️  {len(contatos)} contato(s) salvo(s) em {caminho}")    
+    print(f"✔️  {len(contatos)} contato(s) salvo(s) em {ARQUIVObin}")    
+    
     
     
     # Função para carregar os dadods do pickle
     
-def carregar_de_binario(caminho):
+def carregar_de_binario(ARQUIVObin):
     try:
-        with open(caminho, "rb") as arquivo:
+        with open(ARQUIVObin, "rb") as arquivo:
             return pickle.load(arquivo)
     except FileNotFoundError:
-        print(f"Arquivo {caminho} ainda não existe. Começando vazio.")
+        print(f"Arquivo {ARQUIVObin} ainda não existe. Começando vazio.")
         return[]
    
    
@@ -114,7 +118,7 @@ def remover (contatos):
     
 def menu():
     
-    contatos = carregar_de_binario("agenda.bin")
+    contatos = carregar_de_binario(ARQUIVObin) or carregar_de_txt(ARQUIVOtxt)
     while True:
         print("\n========= AGENDA =========")
         print("1 - Cadastrar contato")

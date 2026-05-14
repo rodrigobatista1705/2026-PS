@@ -1,0 +1,2 @@
+calinho;gato;2;gatopreto;julia;5.0;feio;True
+thor;cão;10;labrador;rodrigo;15.0;carinhoso;False
