@@ -1,8 +1,8 @@
-# Arquivo   : pet.py
+# Arquivo   : hotel_pets_v2.py
 # Disciplina : Programação de Sistemas
 # Autor     : Rodrigo Lima dos Sanos Batista
 # Usuario   : rodrigobatista1705
-# Data      : 05/05/2026
+# Data      : 14/05/2026
 # Conceito  : Classe, objeto, atributos, métodos, encapsulamento
 
 import os
