@@ -69,7 +69,7 @@ class Pet:
         self.obs = obs
         self.vacinacao = vacinacao
         self.hospedado = False
-
+        
     def calcular_diaria(self):
         if self.peso < 10:
             return int(10.0 * self.peso)
@@ -86,11 +86,34 @@ class Pet:
         print(f"Idade          : {self.idade}")
         print(f"Raça           : {self.raca}")
         print(f"Nome do dono   : {self.nomeD}")
-        print(f"Peso           : {self.peso}")
+        print(f"Peso(kg)       : {self.peso}")
         print(f"Observações    : {self.obs}")
         print(f"Vacinado       : {'Sim' if self.vacinacao else 'Não'}")
         print(f"Hospedado      : {'Sim' if self.hospedado else 'Não'}")
         print(f"Valor da diária: {self.calcular_diaria()} R$")
+        
+    # quando uma função esta dentro da clase ela não pode ser acessada no menu ou seja crie uma função para o menu 
+    def atualiar_pet(self, PETs):
+        print("\npeso atual {self.peso}kg de : {self.nome}")
+        novo_peso = float(input("DIgite o novo peso(kg): "))
+        self.peso = novo_peso
+        print(f"O peso foi atualizado para {self.peso} kg.")
+
+
+    def verificar_vacinacao(self):
+            '''Verifica se o pet está vacinado'''
+            if self.vacinacao:
+                print(f"{self.nome} está vacinado.")
+            else:             
+                print(f"{self.nome} não está vacinado.")
+            return self.vacinacao
+    
+ # arrumar   
+def atualizar_peso_pet(PETs):
+    len
+    indice = int(input("\nN° do pet para atualizar o peso: ")) - 1
+    if 0 <= indice < len(PETs):
+        PETs[indice].atualizar_peso.()
         
         
 def verificar_vacinacao_pet(PETs):
@@ -99,13 +122,6 @@ def verificar_vacinacao_pet(PETs):
     if 0 <= indice < len(PETs):
         PETs[indice].verificar_vacinacao()
 
-def atualizar_peso_pet(PETs):
-    listar(PETs)
-    indice = int(input("\nN° do pet para atualizar peso: ")) - 1
-    if 0 <= indice < len(PETs):
-        PETs[indice].atualizar_peso()
-        salvar_em_text(PETs, ARQUIVO)
-        salvar_em_binario(PETs, ARQUIVOB)
 
 def registrar_entrada_pet(PETs):
     listar(PETs)
@@ -125,6 +141,33 @@ def registrar_saida_pet(PETs):
         salvar_em_text(PETs, ARQUIVO)
         salvar_em_binario(PETs, ARQUIVOB)
 
+def buscar_pet(PETs):
+    print("\n**🔍 Buscar na Pet 🔍**")
+    termo = input("Digite parte do nome do pet: ").strip().lower()
+    encontrados = []
+    for pEt in PETs:
+        if termo in pEt.nome.lower():
+            encontrados.append(pEt)
+    if encontrados:
+        print(f"✅ Encontramos {len(encontrados)} resultado(s):")
+        for pEt in encontrados:
+            pEt.emitir_resumo()
+    else:
+        print("❌ Nenhum pet encontrado com esse termo.")
+        
+def hospedes(PETs):
+    print("\n** Pets Hospedados **")
+    hospedados = []
+    for pet in PETs:
+        if pet.hospedado:
+            hospedados.append(pet)
+    if not hospedados:
+        print("\n Não há pets hospedado no hotel.")
+        return
+
+    print(f"\n--- Pets Hospedados no Hotel ({len(hospedados)} no momento) ---")
+    for i, pet in enumerate(hospedados, start=1):
+        print(f"[{i}] Nome: {pet.nome} | Espécie: {pet.especie} | Dono: {pet.nomeD}")
 
 # Função de cadastrar pet
 
@@ -156,14 +199,6 @@ def listar(PETs):
     for i, c in enumerate(PETs, start=1):
         print(f"[{i}] Nome: {c.nome} | Espécie: {c.especie} | Dono: {c.nomeD}")
 
-    escolha = input("\nDeseja emitir resumo de algum pet? (s/n): ").lower()
-    if escolha == "s":
-        indice = int(input("Digite o número do pet: ")) - 1
-        if 0 <= indice < len(PETs):
-            PETs[indice].emitir_resumo()
-        else:
-            print("Índice inválido.")
-
 
 
 # Função para remover um pet da lista
@@ -194,6 +229,8 @@ def menu():
         print("5 - Verificar vacinação")
         print("6 - Registrar entrada no hotel")
         print("7 - Registrar saída do hotel")
+        print("8 - Buscar Pet")
+        print("9 - Hospedes")
         print("0 - Sair")
 
         opcao = input("Opção: ")
@@ -202,6 +239,13 @@ def menu():
             cadastrar(PETs)
         elif opcao == "2":
             listar(PETs)
+            escolha = input("\nDeseja emitir resumo de algum pet? (s/n): ").lower()
+            if escolha == "s":
+                indice = int(input("Digite o número do pet: ")) - 1
+                if 0 <= indice < len(PETs):
+                    PETs[indice].emitir_resumo()
+                else:
+                    print("Índice inválido.")               
         elif opcao == "3":
             remover_pet(PETs)
         elif opcao == "4":
@@ -212,6 +256,10 @@ def menu():
             registrar_entrada_pet(PETs)
         elif opcao == "7":
             registrar_saida_pet(PETs)
+        elif opcao == "8":
+            buscar_pet(PETs)
+        elif opcao == "9":
+            hospedes(PETs)
         elif opcao == "0":
             print("Até logo!")
             break
