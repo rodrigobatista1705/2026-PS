@@ -5,81 +5,52 @@
 # Data      : 14/05/2026
 # Conceito  : Classe, objeto, atributos, métodos, encapsulamento
 
-import os
-import pickle
+#import os
+#import pickle
 import json
 from pathlib import Path
 
-ARQUIVO_JSON = Path.cwd() / "02_poo" / "hotel_pet_v3" / "pets.json"
+ARQUIVO_JSON = Path(__file__).parent / "Spet.json"
 
 # Arquivos de persistência
 #ARQUIVO = os.path.join(os.path.dirname(__file__), "arquivo.txt")
 #ARQUIVOB = os.path.join(os.path.dirname(__file__), "arquivo.bin")
 
 
-
-
-def salvar_petsJSON(lista_pets):
-    ARQUIVO_JSON.parent.mkdir(parents=True, exist_ok=True)
+def salvar_pets(lista_pets):
     
-    lista_dicionarios =[pet.para_dicionario() for pet in lista_pets]
+    ARQUIVO_JSON.parent.mkdir(parents=True, exist_ok=True)
+
+    
+    lista_dicionarios = [pet.para_dicionario() for pet in lista_pets]
     with open(ARQUIVO_JSON, "w", encoding="utf-8") as arquivo:
         json.dump(lista_dicionarios, arquivo, ensure_ascii=False, indent=4)
-        
     print(f"Dados salvos com sucesso em pets.json")
 
+
 def carregar_pets():
+    """
+    Carrega os pets do arquivo pets.json.
+
+    Se o arquivo ainda não existir, retorna uma lista vazia.
+    """
+
     if not ARQUIVO_JSON.exists():
-        print(f"Arquivo JSON não encontrado")
+        print(f"Aviso: O arquivo {ARQUIVO_JSON} não foi encontrado. Iniciando lista vazia.")
         return []
-    with open (ARQUIVO_JSON, "r", encoding="utf-8") as arquivo:
+
+    with open(ARQUIVO_JSON, "r", encoding="utf-8") as arquivo:
         lista_dicionarios = json.load(arquivo)
-        
-    lista_pets = [Pet.criar_de_dicionario(dados) for dados in lista_dicionarios]
-    return lista_pets
 
-# Funções de Persistência em TXT e Binario
-"""
-def salvar_em_text(PETs, ARQUIVO):
-    with open(ARQUIVO, "w", encoding="utf-8") as arquivo:
-        for p in PETs:
-            linha = f"{p.nome};{p.especie};{p.idade};{p.raca};{p.nomeD};{p.peso};{p.obs};{p.vacinacao}"
-            arquivo.write(linha + "\n")
-    print(f"✔️  {len(PETs)} pet(s) salvo(s) em {ARQUIVO}")
-
-
-def carregar_de_txt(ARQUIVO):
     PETs = []
-    try:
-        with open(ARQUIVO, "r", encoding="utf-8") as arquivo:
-            for linha in arquivo:
-                linha = linha.strip()
-                if not linha:
-                    continue
-                partes = linha.split(";")
-                nome, especie, idade, raca, nomeD, peso, obs, vacinacao = partes
-                PETs.append(Pet(nome, especie, int(idade), raca, nomeD, float(peso), obs, vacinacao == "True"))
-    except FileNotFoundError:
-        print(f"Arquivo {ARQUIVO} ainda não existe. Começando vazio.")
+
+    for dados in lista_dicionarios:
+        pet = Pet.criar_de_dicionario(dados)
+        PETs.append(pet)
+
     return PETs
 
 
-def salvar_em_binario(PETs, ARQUIVOB):
-    with open(ARQUIVOB, "wb") as arquivo:
-        pickle.dump(PETs, arquivo)
-    print(f"✔️  {len(PETs)} pet(s) salvo(s) em {ARQUIVOB}")
-
-
-def carregar_de_binario(ARQUIVOB):
-    try:
-        with open(ARQUIVOB, "rb") as arquivo:
-            return pickle.load(arquivo)
-    except FileNotFoundError:
-        print(f"Arquivo {ARQUIVOB} ainda não existe. Começando vazio.")
-        return []
-
-
-"""
 # Classe Pet
 
 class Pet:
@@ -170,7 +141,7 @@ def atualizar_peso_pet(PETs):
     indice = int(input("\nN° do pet para atualizar o peso: ")) - 1
     if 0 <= indice < len(PETs):
         PETs[indice].atualizar_peso()
-        salvar_petsJSON(PETs)
+        salvar_pets(PETs)
     else:
         print("Índice inválido.")
         
@@ -196,7 +167,7 @@ def registrar_entrada_pet(PETs):
     if 0 <= indice < len(PETs):
         PETs[indice].hospedado = True
         print(f"{PETs[indice].nome} entrou no hotel.")
-        salvar_petsJSON(PETs)
+        salvar_pets(PETs)
     
 def registrar_saida_pet(PETs):
     if not PETs:
@@ -207,7 +178,7 @@ def registrar_saida_pet(PETs):
     if 0 <= indice < len(PETs):
         PETs[indice].hospedado = False
         print(f"{PETs[indice].nome} saiu do hotel.")
-        salvar_petsJSON(PETs)
+        salvar_pets(PETs)
 
 def buscar_pet(PETs):
     print("\n**🔍 Buscar na Pet 🔍**")
@@ -252,7 +223,7 @@ def cadastrar(PETs):
     PETs.append(Pet(nome, especie, idade, raca, nomeD, peso, obs, vacinacao))
     print("✔️  Pet cadastrado")
     
-    salvar_petsJSON(PETs)
+    salvar_pets(PETs)
 
 
 #Função para listar os pets hospeados
@@ -277,7 +248,7 @@ def remover_pet(PETs):
     if 0 <= indice < len(PETs):
         removido = PETs.pop(indice)
         print(f"✔️  Pet '{removido.nome}' removido.")
-        salvar_petsJSON(PETs)
+        salvar_pets(PETs)
     else:
         print("Índice inválido.")
 
