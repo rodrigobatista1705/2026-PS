@@ -21,9 +21,10 @@ public class CardapioRestaurante{
             System.out.println("7 - A Sua Banoffee .......... R$ 11,00");
             System.out.println("8 - Ganasha ................. R$ 10,00");
             System.out.println("9 - Geladeira-pência  ....... R$ 12,00\n");
+            System.out.println("0 - Finalizar Pedido");
             System.out.println("==========================================");
         
-            System.out.print("Escolha uma opção (0 para sair): ");
+            System.out.print("Escolha uma opção: ");
             opcao = entrada.nextInt();
             if (opcao ==0 ) break;
             System.out.print("Quantos deseja: ");
