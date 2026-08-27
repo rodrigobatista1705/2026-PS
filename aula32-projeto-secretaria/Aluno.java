@@ -12,13 +12,15 @@ public class Aluno{
     private String nome;
     private String matricula;
     private String curso;
+    private String email;
 
-    public Aluno(String nome, String matricula, String curso){
+    public Aluno(String nome, String matricula, String curso, String email){
         //this = ESTA ficha aui (o self do java)
         // this.nome eh o atributo da ficha; nome, sozinho, e o parametro que acabou de chegar. Sem  'this', os dois seriam o parametro
         this.nome = nome;
         this.matricula = matricula;
         this.curso = curso;
+        this.email = email;
     }
 
     //getters: as janelas leitura
@@ -30,6 +32,9 @@ public class Aluno{
     }
     public String getCurso(){
         return curso;
+    }
+    public String getEmail(){
+        return email;
     }
 
     //Setters: aa unica porta de entrada para mudar um dado da ficha
