@@ -196,7 +196,7 @@ public class Main {
         System.out.println("Alunos de " + curso + ": " + contador);
     }
 
-    //Funcao de busca por nome
+    //Funcao de busca por nome ( ou qualquer parte dele)
     static void buscaN(ArrayList<Aluno> lista, Scanner teclado){
         System.out.print("Nome procurado: ");
         String nome = teclado.nextLine().trim();
