@@ -131,7 +131,7 @@ public class Main {
         return null;
     }
 
-    // Funcao de busca
+    // Funcao de busca por matricula
     static void buscar(ArrayList<Aluno> lista, Scanner teclado){
         System.out.print("Matricula procurada: ");
         String matricula = teclado.nextLine().trim();
@@ -145,7 +145,7 @@ public class Main {
         }
     }
 
-    // Funcao Atualizar
+    // Funcao Atualizar aluno
     static void Atualizar(ArrayList<Aluno> lista, Scanner teclado){
         System.out.print("Matricula da ficha a atualizar: ");
         String matricula = teclado.nextLine().trim();
@@ -160,7 +160,7 @@ public class Main {
         System.out.println("Ficha atualizada: "+ a);
     }
 
-    // Funcao Remover
+    // Funcao Remover aluno
     static void remover (ArrayList<Aluno> lista, Scanner teclado){
         System.out.print("Matricula a ficha a remover: ");
         String matricula = teclado.nextLine().trim();
