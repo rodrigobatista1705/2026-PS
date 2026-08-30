@@ -29,3 +29,18 @@ Conteúdo completo de revisão dos fundamentos da linguagem, organizado de forma
 * 💻 **Programação de Sistemas | 2026**
 
 Este material é de caráter educacional. Sinta-se livre para estudar, modificar e compartilhar o conhecimento!
+
+# 🎯 Autoavaliacao
+Conceito pretendido: [ B ]
+
+Justificativa (cite a classe/metodo de cada criterio):
+- Ex 1-2 (arrays + metodos): Array armazena multiplos valores do mesmo tipo, metodo retorna valor acumulado(media ou numerode aprovados
+)
+
+- Ex 3 (ArrayList): estrutura permite adicionar elementos sem precisar definir tamanho
+
+- Ex 4 (sobrecarga): criar metodo com mesmo nome, com parametros diferentes, ou seja vc pode escolher qual deseja chamr quando necessario. EX: uma função numera e a outra calcula o maior de dois numeors mas elas podem ser aplicadas simultaneamente
+
+- Ex 5 (integracao): Integração serve para deixar o codigo mais organizado e reutilizavel, já que chama uma função para realizar uma tarefa que pode ser repetida varias vezes. EX: repetir varias vezes um codigo para calcular a media de notas sendo que pode usar umafunção em que vc apenas fala os numeros e ela retorna a media
+
+- Autoavaliacao: esta secao do README
