@@ -1,3 +1,11 @@
+/*
+ * Diciplina:   2026-PS
+ * Estudante:   Rorigo Lima dos Santos Batista 
+ * Data     :   2026.09.03
+ * Projeto  :   aula 35 Revisão do Trimestre
+ * Arquivo  :   Main.java
+ */
+
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -14,10 +22,10 @@ public class Main {
             System.out.println("\n=== SISTEMA DE PRODUTOS ===");
             System.out.println("1 - Cadastrar");
             System.out.println("2 - Listar");
-            System.out.println("3 - Alterar preco");
+            System.out.println("3 - Alterar preço");
             System.out.println("4 - Remover");
             System.out.println("5 - Sair");
-            System.out.print("Opcao: ");
+            System.out.print("Opção: ");
 
             String opcao = teclado.nextLine().trim();
 
@@ -38,27 +46,8 @@ public class Main {
                     System.out.println("Sistema encerrado.");
                     return;
                 default:
-                    System.out.println("Opcao invalida utilize apenas 1, 2, 3, 4 ou 5");
-            }
-            /* 
-            if (opcao.equals("5")){
-                System.out.println("Sistema encerrado.");
-                break;
-            }else if (opcao.equals("1")) {
-                cadastrar(produtos, teclado);
-
-            } else if (opcao.equals("2")) {
-                listar(produtos);
-
-            } else if (opcao.equals("3")) {
-                AltPreco(produtos, teclado);
-
-            } else if (opcao.equals("4")) {
-                remove(produtos, teclado);
-            }else {
-                System.out.println("Opcao invalida utilize apenas 1, 2, 3, 4 ou 5");
-            }*/
-                
+                    System.out.println("Opção invalida utilize apenas 1, 2, 3, 4 ou 5");
+            }   
         }
     }
 
@@ -68,13 +57,13 @@ public class Main {
         teclado.nextLine();
 
         if (buscarPorCodigo(produtos, codigo) != null){
-            System.out.println("Ja existe um produto com esse codigo: " + codigo);
+            System.out.println("Ja existe um produto com esse código: " + codigo);
             return;
         }
         System.out.print("Nome: ");
         String nome = teclado.nextLine();
 
-        System.out.print("Preco: ");
+        System.out.print("Preço: ");
         double preco = teclado.nextDouble();
         teclado.nextLine();
 
@@ -96,14 +85,14 @@ public class Main {
     }
 
     static void AltPreco(ArrayList<Produto> produtos, Scanner teclado){
-        System.out.print("Produto para Alterar o preco: ");
+        System.out.print("Produto para Alterar o preço: ");
         int codigo = teclado.nextInt();
         Produto p = buscarPorCodigo(produtos, codigo);
         if (p== null){
-            System.out.println("Nenhum Produto encontrado com esse codigo: " + codigo +".");
+            System.out.println("Nenhum Produto encontrado com esse código: " + codigo +".");
             return;
         }
-        System.out.print("Novo Preco de "+ p.getNome() + ": ");
+        System.out.print("Novo Preço de "+ p.getNome() + ": ");
         double novoPreco = teclado.nextDouble();
         teclado.nextLine();
 
@@ -118,7 +107,7 @@ public class Main {
         }else{
             p.AltPreco(novoPreco);
         }        
-        System.out.println("Preco alterado com sucesso para " + p.getNome() + ": R$ " + p.getPreco());
+        System.out.println("Preço alterado com sucesso para " + p.getNome() + ": R$ " + p.getPreco());
     }
 
 
@@ -139,7 +128,7 @@ public class Main {
         teclado.nextLine();
         Produto p = buscarPorCodigo(produtos, codigo);
         if (p == null){
-            System.out.println("Nenhum produto com esse codigo encontrado " + codigo +".");
+            System.out.println("Nenhum produto com esse código encontrado " + codigo +".");
             return;
         }
         System.out.print("Tem certeza que quer remover " + p.getNome() + "? (s/n): ");
@@ -149,7 +138,7 @@ public class Main {
             produtos.remove(p);
             System.out.println("Produto removido.");
         }else {
-            System.out.println("Remocao cancelada");
+            System.out.println("Remoção cancelada");
         }
     }
 }

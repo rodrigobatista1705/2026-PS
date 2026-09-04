@@ -1,3 +1,12 @@
+/*
+ * Diciplina:   2026-PS
+ * Estudante:   Rorigo Lima dos Santos Batista 
+ * Data     :   2026.09.03
+ * Projeto  :   aula 35 Revisão do Trimestre
+ * Arquivo  :   Produto.java
+ */
+
+
 public class Produto {
 
     private int codigo;
