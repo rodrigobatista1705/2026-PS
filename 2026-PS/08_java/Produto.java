@@ -9,7 +9,7 @@ public class Produto {
         this.nome = nome;
         this.preco = preco;
     }
-
+    // Getters
     public double getPreco(){
         return preco;
     }
@@ -20,6 +20,7 @@ public class Produto {
         return codigo;
     }
 
+    //Setters
     public void setPreco(double preco){
         this.preco = preco;
     }
@@ -30,8 +31,12 @@ public class Produto {
         this.codigo = codigo;
     }
 
+    //Metodo alterar preco 
+    public void AltPreco(double preco) {
+        this.preco = preco;
+    }
 
-    public void alterarPreco(double preco, double desconto) {
+    public void AltPreco(double preco, double desconto) {
         this.preco = preco - (preco * desconto / 100);
     }
     @Override
