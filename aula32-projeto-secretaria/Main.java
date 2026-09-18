@@ -20,7 +20,7 @@ public class Main {
     public static void main(String[] args) {
         Scanner teclado = new Scanner(System.in);
         
-        // O Gaveteiro: o <Aluno> diz que so entra ficha de alunp aqui 
+        // O Gaveteiro: o <Aluno> diz que so entra ficha de aluno aqui 
         ArrayList<Aluno> lista = new ArrayList<Aluno>();
 
         // while (true) = repete infinitamente. A unica saida e o break opcao "0"
